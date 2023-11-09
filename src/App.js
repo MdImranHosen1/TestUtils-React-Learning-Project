@@ -1,9 +1,11 @@
 import './App.css';
+import { About } from './components/About';
 import Alart from './components/Alart';
 import Navbar from './components/Navbar';
 import TextFrom from './components/TextFrom';
 import React, { useState } from 'react';
-
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -33,6 +35,10 @@ function App() {
       setMode("dark");
       document.body.style.backgroundColor = '#3e3e42';
       showAlart("success", "Dark mode enable successfully");
+      // Called every 1.5 second
+      // setInterval(() => {
+      //   document.title = "welcome";
+      // }, 1500)
     }
   }
 
@@ -40,9 +46,21 @@ function App() {
 
   return (
     <>
-      <Navbar title="Home" aboutText="About" mode={mode} toggleMode={toggleMode} />
-      <Alart alart={alart} />
-      <TextFrom mode={mode} showAlart={showAlart} />
+      <BrowserRouter>
+
+        <Navbar title="Home" aboutText="About" mode={mode} toggleMode={toggleMode} />
+        <Alart alart={alart} />
+
+
+        <Routes>
+
+          <Route exect path="/" element={<TextFrom mode={mode} showAlart={showAlart} />} />
+          <Route exect path="/about" element={<About />} />
+
+        </Routes>
+
+
+      </BrowserRouter>
     </>
   );
 }
