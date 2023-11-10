@@ -39,10 +39,15 @@ export default function TextFrom(props) {
         }).join(" ");
         setResult(s);
     }
+
     function handleClearClick() {
         setText("");
         setResult("")
         props.showAlart("danger", `Text clear successfully`);
+    }
+    const handleCopy = () => {
+        navigator.clipboard.writeText(text);
+        props.showAlart("success", `Text clear successfully`);
     }
 
     function handleOnChange(event) {
@@ -64,6 +69,7 @@ export default function TextFrom(props) {
                     <FunButton handleClick={handleLowercaseClick} buttonText="Convert Lowercase" props={props} />
                     <FunButton handleClick={handleTitlecaseClick} buttonText="Convert Titlecase" props={props} />
                     <FunButton handleClick={handleClearClick} buttonText="Clear" color='red' props={props} />
+                    <FunButton handleClick={handleCopy} buttonText="Copy" props={props} />
 
                     {/* Button closed */}
                 </>
